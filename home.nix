@@ -61,6 +61,55 @@
     enable = true;
   };
 
+  # [替代 Oh-My-Zsh 主题] Starship 提示符
+  programs.starship = {
+    enable = true;
+    enableZshIntegration = true;
+    settings = {
+      # 扫描超时时间（毫秒）
+      scan_timeout = 10;
+
+      # 命令执行时间显示
+      cmd_duration = {
+        min_time = 500;
+        format = "took [$duration](bold yellow)";
+      };
+
+      # Git 状态配置
+      git_status = {
+        conflicted = "🏳";
+        ahead = "⇡\${count}";
+        behind = "⇣\${count}";
+        diverged = "⇕⇡\${ahead_count}⇣\${behind_count}";
+        untracked = "🤷";
+        stashed = "📦";
+        modified = "📝";
+        staged = "➕";
+        renamed = "👅";
+        deleted = "🗑";
+      };
+
+      # Python 环境显示
+      python = {
+        symbol = "🐍 ";
+        pyenv_version_name = true;
+        format = "via [\${symbol}\${pyenv_prefix}(\${version} )(\\($virtualenv\\) )]($style)";
+      };
+
+      # 目录显示
+      directory = {
+        truncation_length = 3;
+        truncate_to_repo = true;
+      };
+
+      # 字符提示符
+      character = {
+        success_symbol = "[➜](bold green)";
+        error_symbol = "[➜](bold red)";
+      };
+    };
+  };
+
   # ============================================================
   # 3. Zsh 终极配置
   # ============================================================
@@ -83,16 +132,16 @@
       searchDownKey = [ "^[[B" "^N" ]; # Down Arrow / Ctrl+N
     };
 
-    # Oh-My-Zsh 模块
+    # Oh-My-Zsh 模块（主题已由 Starship 接管）
     oh-my-zsh = {
       enable = true;
-      plugins = [ 
-        "git" 
-        "sudo" 
-        "extract" 
-        "colored-man-pages" 
+      plugins = [
+        "git"
+        "sudo"
+        "extract"
+        "colored-man-pages"
       ];
-      theme = "robbyrussell";
+      theme = ""; # 禁用主题，使用 Starship
     };
 
     # Shell 别名

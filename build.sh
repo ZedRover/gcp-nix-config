@@ -1,0 +1,1 @@
+nix run --impure home-manager/master -- switch --flake . -b backup
