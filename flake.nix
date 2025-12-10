@@ -11,8 +11,8 @@
     let
       # 1. 这里直接硬编码你的系统信息，最稳
       system = "x86_64-linux";
-      username = "zed"; 
-      homeDirectory = "/home/zed";
+      username = "ubuntu"; 
+      homeDirectory = "/home/ubuntu";
 
       pkgs = nixpkgs.legacyPackages.${system};
       
@@ -29,10 +29,10 @@
       };
     in {
       homeConfigurations = {
-        # 2. 同时暴露 "zed" 和 "zed@ml-training" 两个入口
+        # 2. 同时暴露 "ubuntu" 和 "ubuntu@ml-training" 两个入口
         # 这样无论 home-manager 怎么猜都能猜中
-        "zed" = myHomeConfig;
-        "zed@ml-training" = myHomeConfig;
+        "ubuntu" = myHomeConfig;
+        "ubuntu@ml-training" = myHomeConfig;
       };
     };
 }
