@@ -3,7 +3,17 @@
 {
   # 注意：username 和 homeDirectory 已由 flake.nix 动态传入
   programs.home-manager.enable = true;
-  home.stateVersion = "24.05"; 
+  home.stateVersion = "24.05";
+
+  # ============================================================
+  # PATH 配置（推荐方式）
+  # ============================================================
+  home.sessionPath = [
+    "$HOME/.local/bin"
+    # 可以添加更多路径
+    # "$HOME/bin"
+    # "$HOME/go/bin"
+  ]; 
 
   # ============================================================
   # 1. 软件包安装 (Packages)
