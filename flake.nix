@@ -1,5 +1,5 @@
 {
-  description = "Ubuntu Server Environment for Zed";
+  description = "Ubuntu Server Environment";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
@@ -9,18 +9,19 @@
 
   outputs = { self, nixpkgs, home-manager, ... }:
     let
-      # 1. 这里直接硬编码你的系统信息，最稳
+      # 1. 这里的用户信息会被 build.sh 自动替换
       system = "x86_64-linux";
-      username = "ubuntu"; 
-      homeDirectory = "/home/ubuntu";
+      username = "__USERNAME__";
+      homeDirectory = "__HOME_DIR__";
 
       pkgs = nixpkgs.legacyPackages.${system};
       
       # 定义配置逻辑，方便复用
       myHomeConfig = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [ 
-          ./home.nix 
+        modules = [
+          ./home.nix
+          ./app.nix  # Homebrew 包管理模块
           {
             home.username = username;
             home.homeDirectory = homeDirectory;
@@ -29,10 +30,9 @@
       };
     in {
       homeConfigurations = {
-        # 2. 同时暴露 "ubuntu" 和 "ubuntu@ml-training" 两个入口
-        # 这样无论 home-manager 怎么猜都能猜中
-        "ubuntu" = myHomeConfig;
-        "ubuntu@ml-training" = myHomeConfig;
+        # 2. 动态暴露用户名作为入口点，支持多种格式
+        "${username}" = myHomeConfig;
+        "${username}@ml-training" = myHomeConfig;
       };
     };
 }

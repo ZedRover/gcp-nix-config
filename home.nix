@@ -171,7 +171,7 @@
       # 3. 优化历史记录
       setopt HIST_IGNORE_ALL_DUPS
       setopt HIST_SAVE_NO_DUPS
-      
+
       # 4. 设置默认编辑器
       export EDITOR="vim"
     '';
