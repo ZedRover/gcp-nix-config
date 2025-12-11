@@ -13,7 +13,15 @@
     # 可以添加更多路径
     # "$HOME/bin"
     # "$HOME/go/bin"
-  ]; 
+  ];
+
+  # ============================================================
+  # 环境变量配置
+  # ============================================================
+  home.sessionVariables = {
+    EDITOR = "nvim";
+    VISUAL = "nvim";
+  }; 
 
   # ============================================================
   # 1. 软件包安装 (Packages)
@@ -27,9 +35,9 @@
     git
     curl
     wget
-    vim
+    neovim      # 现代化的 vim
     htop
-    
+
     # 现代化命令行工具 (Rust 重写版)
     fd          # 替代 find (速度极快)
     ripgrep     # 替代 grep
@@ -164,6 +172,10 @@
       cat = "bat";
       g = "git";
       py = "python";
+
+      # 编辑器别名
+      vi = "nvim";
+      vim = "nvim";
     };
 
     # 环境初始化脚本 (加载 uv/pixi 补全)
@@ -181,9 +193,6 @@
       # 3. 优化历史记录
       setopt HIST_IGNORE_ALL_DUPS
       setopt HIST_SAVE_NO_DUPS
-
-      # 4. 设置默认编辑器
-      export EDITOR="vim"
     '';
   };
 }
