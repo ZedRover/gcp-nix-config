@@ -11,8 +11,8 @@
     let
       # 1. 这里的用户信息会被 build.sh 自动替换
       system = "x86_64-linux";
-      username = "__USERNAME__";
-      homeDirectory = "__HOME_DIR__";
+      username = "ubuntu";
+      homeDirectory = "/home/ubuntu";
 
       pkgs = nixpkgs.legacyPackages.${system};
       
